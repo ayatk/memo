@@ -3,17 +3,38 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
+	"github.com/ayatk/memo/content"
 	"github.com/urfave/cli"
+)
+
+var (
+	tag         string
+	description string
 )
 
 func NewCmd() cli.Command {
 	return cli.Command{
 		Name:   "new",
 		Usage:  "Create new memo.",
+		Flags:  flags,
 		Action: action,
 	}
+}
+
+var flags = []cli.Flag{
+	cli.StringFlag{
+		Name:        "tag, t",
+		Usage:       "Add tags in memo.",
+		Destination: &tag,
+	},
+	cli.StringFlag{
+		Name:        "description, d",
+		Usage:       "Add description in memo.",
+		Destination: &description,
+	},
 }
 
 func action(c *cli.Context) error {
@@ -34,7 +55,23 @@ func action(c *cli.Context) error {
 	}
 
 	defer file.Close()
-	file.WriteString(fmt.Sprintf("# %s", arg))
 
+	var data []string
+	if c.NumFlags() > 0 {
+		meta := content.MetaData{}
+
+		if tag != "" {
+			meta.Tag = tag
+		}
+
+		if description != "" {
+			meta.Description = description
+		}
+
+		data = append(data, meta.GenerateHeader())
+	}
+	data = append(data, fmt.Sprintf("# %s\n", arg))
+
+	file.WriteString(strings.Join(data, "\n"))
 	return nil
 }
