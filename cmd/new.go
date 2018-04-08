@@ -19,13 +19,13 @@ func NewCmd() cli.Command {
 func action(c *cli.Context) error {
 	arg := c.Args().First()
 	if arg == "" {
-		return cli.NewExitError("Please input file name.\n", 2)
+		return cli.NewExitError("Please input file name.", 2)
 	}
 
 	os.MkdirAll(time.Now().Format("2006/01/02"), 0777)
 	file, err := os.Create(fmt.Sprintf("%s/%s.md", time.Now().Format("2006/01/02"), arg))
 	if err != nil {
-		message := fmt.Sprintf("Already added %s.md.\n", arg)
+		message := fmt.Sprintf("Already added %s.md.", arg)
 		return cli.NewExitError(message, 2)
 	}
 
