@@ -23,10 +23,14 @@ func action(c *cli.Context) error {
 	}
 
 	os.MkdirAll(time.Now().Format("2006/01/02"), 0777)
-	file, err := os.Create(fmt.Sprintf("%s/%s.md", time.Now().Format("2006/01/02"), arg))
-	if err != nil {
+	fpath := fmt.Sprintf("%s/%s.md", time.Now().Format("2006/01/02"), arg)
+	if _, err := os.Stat(fpath); err == nil {
 		message := fmt.Sprintf("Already added %s.md.", arg)
-		return cli.NewExitError(message, 2)
+		return cli.NewExitError(message, 1)
+	}
+	file, err := os.Create(fpath)
+	if err != nil {
+		return cli.NewExitError(err.Error(), 1)
 	}
 
 	defer file.Close()
