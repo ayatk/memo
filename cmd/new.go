@@ -15,13 +15,11 @@ var (
 	description string
 )
 
-func NewCmd() cli.Command {
-	return cli.Command{
-		Name:   "new",
-		Usage:  "Create new memo.",
-		Flags:  flags,
-		Action: action,
-	}
+var NewCmd = cli.Command{
+	Name:   "new",
+	Usage:  "Create new memo.",
+	Flags:  flags,
+	Action: action,
 }
 
 var flags = []cli.Flag{

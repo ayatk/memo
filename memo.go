@@ -21,7 +21,7 @@ func main() {
 	app.Version = version
 
 	app.Commands = []cli.Command{
-		cmd.NewCmd(),
+		cmd.NewCmd,
 	}
 
 	err := app.Run(os.Args)
