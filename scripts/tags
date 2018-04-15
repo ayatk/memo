@@ -8,5 +8,5 @@ if [ $(echo $MERGED_BRANCH | grep -e 'release/v\?[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-
     git config --local user.name "ayatk"
     git config --local user.email "git@ayatk.com"
     git tag "$(echo $MERGED_BRANCH | sed -E "s/release\/(.+)$/\1/")"
-    git push --quiet https://$GH_TOKEN@github.com/ayatk/memo.git --tags 2> /dev/null
+    git push --quiet https://$GITHUB_TOKEN@github.com/ayatk/memo.git --tags 2> /dev/null
 fi
