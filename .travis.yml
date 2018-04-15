@@ -2,3 +2,22 @@ language: go
 sudo: false
 go:
   - "1.10"
+
+env:
+  global:
+    - secure: "tEa3oF5LdxnkKKwrqiBOHgO9+Jmi8v002iBVAn891VaTxCU+joqreY38YI4XwzUVAe7HcTAi+y1E8/Jy3eDVKZtxiSJX7XvmTfLatlbDwzAg+dL4IwhX4qOrrm/Ki86BAy3Zv/khcazJ6CpfZ6S+A+dROXPHweeqfSBXlY2ctVh8xi8vIDmQg79wY5D9Y/98/Fb+IwOfq/7qXGXczwvx2djC2BWMMDlsMtjuXBy2z9jr+pzkL1dO3/uKLVsSDx1saOREcr4pNaTn6IsyBsTI9dmgScRbdJO72Tg9F4n8zPVL+isu0dzkbGjydDu0Lczi4B2Vf71dapGMbqTCFelKHVe/XvgIHCOj4tGmySK1813+dH+IHXryacvA4l1cPSkNQbSNPopEpJvEIcoWUH3sWkHEosOB8bE6MaJuyYTfoZc1ivoG0+SjkBkJ1gm1Y4LFH4Vpaqy/bcZ0J+lRJAiNGpwC5z0+GtwNWQmp5CztFgIho4iotl2kk0H6UbU1D1nguR1v3cNyiOSeTgn4V6bn5F2QQ0tioIewrwEoHGo68ZS16iNZhtlAnX/hkQ1+qN75painKBHqtrEEAWHRTYzUjGVz0piC+5cpgut4Th19iDFvAWOUBkfWm1pBhZAe+lcxK9CQbeXe3zdTh7+Tv473Rrbx7aWCa+eW5K/fEOQ/oRo="
+
+before_deploy:
+  - go get -u github.com/Songmu/ghch/cmd/ghch
+  - go get -u
+  - scripts/package
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file_glob: true
+  file: pkg/dist/*
+  skip_cleanup: true
+  body: ghch -format=markdown --latest
+  on:
+    tags: true
