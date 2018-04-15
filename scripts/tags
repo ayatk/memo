@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-([ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" == "true" ]) && exit
+([ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" == "true" ] || [ "$TRAVIS_TAG" != "" ]) && exit
 
 MERGED_BRANCH=$(git log -n 1 --pretty=format:'%s' | sed -E "s/^Merge pull request #[0-9] from ayatk\/(.+)$/\1/")
 
