@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-REPO=$(grep "NAME" version.go | sed -E "s/.*\"(.+)\"$/\1/")
-VERSION=$(grep "VERSION" version.go | sed -E "s/.*\"(.+)\"$/\1/")
+REPO=$(grep "name " memo.go | sed -E "s/.*\"(.+)\"$/\1/")
+VERSION=$(grep "version " memo.go | sed -E "s/.*\"(.+)\"$/\1/")
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
 
