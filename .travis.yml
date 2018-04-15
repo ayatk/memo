@@ -21,6 +21,6 @@ deploy:
   file_glob: true
   file: pkg/dist/*
   skip_cleanup: true
-  body: ghch --format=markdown --latest
+  body: $(ghch --format=markdown --latest)
   on:
     tags: true
