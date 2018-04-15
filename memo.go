@@ -11,7 +11,7 @@ import (
 const (
 	name        = "memo"
 	description = "Git based idea note management tool."
-	version     = "0.1.0"
+	version     = "0.1.1"
 )
 
 func main() {
