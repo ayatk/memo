@@ -9,7 +9,6 @@ env:
 
 before_deploy:
   - go get -u github.com/Songmu/ghch/cmd/ghch
-  - go get -u
   - scripts/package
 
 deploy:
