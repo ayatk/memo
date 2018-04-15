@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// MetaData is data metadata.
+// MetaData is note metadata struct.
 type MetaData struct {
 	Tag         string
 	Description string
