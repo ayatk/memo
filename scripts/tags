@@ -2,7 +2,7 @@
 
 ([ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" == "true" ] || [ "$TRAVIS_TAG" != "" ]) && exit
 
-MERGED_BRANCH=$(git log -n 1 --pretty=format:'%s' | sed -E "s/^Merge pull request #[0-9] from ayatk\/(.+)$/\1/")
+MERGED_BRANCH=$(git log -n 1 --pretty=format:'%s' | sed -E "s/^Merge pull request #[0-9]+ from ayatk\/(.+)$/\1/")
 
 if [ $(echo $MERGED_BRANCH | grep -e 'release/v\?[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-9]\{1,2\}') ]; then
     git config --local user.name "ayatk"
