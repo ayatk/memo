@@ -27,8 +27,8 @@ fi
 mkdir -p $ROOT_DIR/pkg/dist/${VERSION}
 for PLATFORM in $(find $ROOT_DIR/pkg -mindepth 1 -maxdepth 1 -type d); do
   PLATFORM_NAME=$(basename ${PLATFORM})
-  ARCHIVE_NAME=${REPO}_${VERSION}_${PLATFORM_NAME}
-  if [ $PLATFORM_NAME = "dist" ]; then
+  ARCHIVE_NAME=${REPO}_${PLATFORM_NAME}
+  if [ $PLATFORM_NAME == "dist" ]; then
     continue
   fi
   pushd ${PLATFORM}
@@ -38,5 +38,5 @@ done
 
 # Generate shasum
 cd $ROOT_DIR/pkg/dist/${VERSION}
-shasum * > ./${VERSION}_SHASUMS
+shasum -a 256 * > ./${VERSION}_SHASUMS.txt
 cd -
