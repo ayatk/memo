@@ -12,6 +12,7 @@ after_success:
 
 before_deploy:
   - go get -u github.com/Songmu/ghch/cmd/ghch
+  - go get -u github.com/mitchellh/gox
   - scripts/package
 
 deploy:
@@ -20,6 +21,6 @@ deploy:
   file_glob: true
   file: pkg/dist/*
   skip_cleanup: true
-  body: ghch --format=markdown --latest
+  body: $(ghch --format=markdown --latest)
   on:
     tags: true
